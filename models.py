@@ -1,12 +1,12 @@
 from dataclasses import dataclass
 from typing import List, Optional, Set
 
-dataclass
+@dataclass(frozen=True)
 class MangaTag:
     title: str
     key: str
-
-dataclass
+    
+@dataclass
 class Manga:
     id: str
     title: str
@@ -20,7 +20,7 @@ class Manga:
     state: Optional[str]
     authors: Set[str]
 
-dataclass
+@dataclass
 class MangaChapter:
     id: str
     title: Optional[str]
@@ -29,7 +29,7 @@ class MangaChapter:
     scanlator: Optional[str]
     upload_date_ms: int
 
-dataclass
+@dataclass
 class MangaPage:
     id: str
     url: str
