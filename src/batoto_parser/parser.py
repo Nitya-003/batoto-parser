@@ -1,10 +1,11 @@
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
-from models import Manga, MangaTag, MangaChapter, MangaPage
-from utils import decrypt_batoto, generate_uid
+from batoto_parser.models import Manga, MangaTag, MangaChapter, MangaPage
+from batoto_parser.utils import decrypt_batoto, generate_uid
 from typing import List, Optional,Set
 import json
 import re
+
 
 class BatoToParser:
     """

@@ -1,0 +1,108 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "batoto-parser"
+version = "0.1.0"
+description = "Lightweight parser for Batoto-style manga sites with CLI and library support"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Mehrin Fathima Shamim", email = "mehrinshamim4869@gmail.com"}
+]
+maintainers = [
+    {name = "Mehrin Fathima Shamim", email = "mehrinshamim4869@gmail.com"}
+]
+keywords = ["manga", "parser", "batoto", "web-scraping", "cli"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: POSIX :: Linux",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+dependencies = [
+    "requests>=2.25.0",
+    "beautifulsoup4>=4.9.0",
+    "lxml>=4.6.0",
+    "pycryptodome>=3.10.0",
+    "typer>=0.9.0",
+    "rich>=13.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0.0",
+    "build>=1.0.0",
+    "twine>=4.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/mehrinshamim/batoto-parser"
+Documentation = "https://github.com/mehrinshamim/batoto-parser#readme"
+Repository = "https://github.com/mehrinshamim/batoto-parser.git"
+"Bug Tracker" = "https://github.com/mehrinshamim/batoto-parser/issues"
+
+[project.scripts]
+batoto-parser = "batoto_parser.cli:cli_main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+batoto_parser = ["py.typed"]
+
+# Black configuration
+[tool.black]
+line-length = 100
+target-version = ['py38', 'py39', 'py310', 'py311']
+include = '\.pyi?$'
+
+# Ruff configuration
+[tool.ruff]
+line-length = 100
+target-version = "py38"
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "C4", # flake8-comprehensions
+]
+ignore = [
+    "E501", # line too long (handled by black)
+]
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"]
+
+# Pytest configuration
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --cov=batoto_parser --cov-report=term-missing"
+
+# MyPy configuration
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
